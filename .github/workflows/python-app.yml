@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies and run app
         run: |
           ssh $EC2_USER@$EC2_HOST << EOF
-          cd /home/ubuntu/${{ github.repository }}
+          cd /home/ubuntu/GROUPE5
           python3 -m venv venv
           venv/bin/pip install -r requirements.txt
           nohup venv/bin/python run.py > app.log 2>&1 &

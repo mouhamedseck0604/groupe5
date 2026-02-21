@@ -28,8 +28,8 @@ jobs:
 
       - name: Copy project to EC2 (SCP)
         run: |
-          ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST "mkdir -p /home/$EC2_USER/GROUPE5"
-          scp -i ~/.ssh/id_rsa -r ./ $EC2_USER@$EC2_HOST:/home/$EC2_USER/GROUPE5
+          ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST "mkdir -p /home/$EC2_USER/APPLICATIONS"
+          scp -i ~/.ssh/id_rsa -r ./ $EC2_USER@$EC2_HOST:/home/$EC2_USER/APPLICATIONS
           
         env:
           EC2_USER: ${{ secrets.EC2_USER }}
@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies and run app
         run: |
           ssh $EC2_USER@$EC2_HOST << EOF
-          cd /home/ubuntu/GROUPE5
+          cd /home/ubuntu/APPLICATIONS
           python3 -m venv venv
           venv/bin/pip install -r requirements.txt
           nohup venv/bin/python run.py > app.log 2>&1 &
